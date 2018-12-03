@@ -1,0 +1,76 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Movie DB App</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans|Montserrat" rel="stylesheet">
+    <link href="main.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<!--<input type="text" id="search-box" class="search-box" placeholder="Search your movie here">-->
+<!--<button id="search-button"><i class="fa fa-search"></i></button>-->
+
+<!--<div id="movie"></div>-->
+<!--<div id="people"></div>-->
+<!--<div id="tvshow"></div>-->
+<!--<div id="companies"></div>-->
+<!--<div id="keywords"></div>-->
+<script src="main.js"></script>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="gallery col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h1 class="gallery-title">MovieDB</h1>
+            </div>
+            <div class="col-xs-8 col-xs-offset-2" style="margin-bottom: 37px">
+                <div class="input-group">
+                    <div class="input-group-btn search-panel">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span id="search_concept">Sort by</span> <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#contains">Ratings</a></li>
+                            <li><a href="#its_equal">Year</a></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" id="search-box" class="form-control" name="x" placeholder="Search here...">
+
+                    <span class="input-group-btn">
+                                <button id="search-button" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            </span>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<div id="api-results"></div>
+
+
+</body>
+
+</html>
+
+
+
+
+
