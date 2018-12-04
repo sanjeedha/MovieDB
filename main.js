@@ -11,6 +11,19 @@ $(document).ready(function(e){
 
 $(document).ready(function(){
 
+
+    function dynamicSort(property) {
+        var sortOrder = 1;
+        if(property[0] === "-") {
+            sortOrder = -1;
+            property = property.substr(1);
+        }
+        return function (a,b) {
+            var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+            return result * sortOrder;
+        }
+    }
+
     var allResults = new Map();
 
     $("#search-button").click(function(){
@@ -70,9 +83,9 @@ $(document).ready(function(){
                 </div>
                 <br/>
                 <br/>  
-                <br/>
+                <br/> `;
 
-            `;
+            var finalResults = [];
 
             for (var [key, value] of allResults) {
 
@@ -89,16 +102,31 @@ $(document).ready(function(){
                     } else if (key == "people") {
                         imgPath = res[i].profile_path;
                     }
-                    var title = res[i].title;
+
+                    var title = null;
+
+                    if (typeof res[i].title != "undefined") {
+                        title = res[i].title;
+                    } else if (typeof res[i].name != "undefined") {
+                        title = res[i].name;
+                    }
+
+
                     var overview = res[i].overview;
                     var year = res[i].release_date;
-                    var rating = res[i].vote_average;
 
+                    var rating = null;
+
+                    if (typeof res[i].vote_average != "undefined") {
+                        rating = res[i].vote_average;
+                    } else if (typeof res[i].popularity != "undefined") {
+                        rating = res[i].popularity;
+                    }
 
                     var yearStr = '';
                     var ratingStr = '';
                     if (typeof year != 'undefined') {
-                        yearStr = JSON.stringify(year).substring(1, 5);
+                        yearStr = "(" + JSON.stringify(year).substring(1, 5) + ")";
                     }
 
                     if (typeof rating != 'undefined') {
@@ -111,21 +139,55 @@ $(document).ready(function(){
                     } else {
                         img = "https://image.tmdb.org/t/p/w500" + imgPath;
                     }
-                    apiHTML += `
+
+
+                    var tmpResult = {
+                        "title": title,
+                        "yearStr": yearStr,
+                        "ratingStr": ratingStr,
+                        "overview": overview,
+                        "img": img,
+                        "year": year
+                    };
+
+                    finalResults.push(tmpResult);
+
+            //         apiHTML += `
+            //                 <div class="container gallery_product col-lg-6 col-md-6 col-sm-6 col-xs-6 filter ${key}">
+            //                    <div class="frame">
+            //                     <a href="#">
+        	// <span class="caption">
+        	// 	<h2>${title} ${yearStr} <span style="float: right; font-weight: lighter !important;"><span class="fa fa-star checked"></span> ${ratingStr}</span></h2>
+            // <p class="desc">${overview}</p>
+        	// </span>
+            //       <img src=${img} class="img-responsive"></a>
+            //     </div>
+            //     </div>
+            //             `;
+                }
+            }
+
+            console.log(finalResults);
+
+            // finalResults.sort(dynamicSort("-ratingStr"));
+            // finalResults.sort(dynamicSort("-yearStr"));
+
+            console.log(finalResults);
+
+            for (i = 0; i < finalResults.length; i++) {
+                apiHTML += `
                             <div class="container gallery_product col-lg-6 col-md-6 col-sm-6 col-xs-6 filter ${key}">
                                <div class="frame">
                                 <a href="#">
         	<span class="caption">
-        		<h2>${title} (${yearStr}) <span style="float: right; font-weight: lighter !important;"><span class="fa fa-star checked"></span> ${ratingStr}</span></h2>
-            <p class="desc">${overview}</p>
+        		<h2>${finalResults[i].title} ${finalResults[i].yearStr} <span style="float: right; font-weight: lighter !important;"><span class="fa fa-star checked"></span> ${finalResults[i].ratingStr}</span></h2>
+            <p class="desc">${finalResults[i].overview}</p>
         	</span>              
-                  <img src=${img} class="img-responsive"></a>
+                  <img src=${finalResults[i].img} class="img-responsive"></a>
                 </div>
                 </div>
                         `;
-                }
             }
-
 
 
             $("#api-results").html(apiHTML);
