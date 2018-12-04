@@ -44,29 +44,9 @@ $(document).ready(function(){
             "data": "{}"
         };
 
-        var companyapi = {
-            "async": true,
-            "crossDomain": true,
-            "url": `https://api.themoviedb.org/3/search/company?api_key=ddb907d69f1671fabdfd75c40b664a37&language=en-US&query=${searchterm}&page=1&include_adult=false`,
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-        };
 
-        var keywordapi = {
-            "async": true,
-            "crossDomain": true,
-            "url": `https://api.themoviedb.org/3/search/keyword?api_key=ddb907d69f1671fabdfd75c40b664a37&language=en-US&query=${searchterm}&page=1&include_adult=false`,
-            "method": "GET",
-            "headers": {},
-            "data": "{}"
-        };
 
-        var arr = [movieapi, peopleapi, tvshowapi, companyapi, keywordapi];
-
-        var callback = function() {
-            console.log("done");
-        };
+        var arr = [movieapi, peopleapi, tvshowapi];
 
         var requests = [];
 
@@ -74,13 +54,12 @@ $(document).ready(function(){
             requests.push($.ajax(arr[i]));
         }
 
-        $.when.apply(undefined, requests).done(function(response1, response2, response3, response4, response5){
+        $.when.apply(undefined, requests).done(function(response1, response2, response3){
 
             allResults.set("movies", response1);
             allResults.set("people", response2);
             allResults.set("tvshows", response3);
-            allResults.set("companies", response4);
-            allResults.set("keywords", response5);
+
 
             var apiHTML = `            
                 <div align="center" style="margin-bottom: 37px">
@@ -88,8 +67,6 @@ $(document).ready(function(){
                     <button class="btn btn-default filter-button" data-filter="movies">Movies</button>
                     <button class="btn btn-default filter-button" data-filter="people">People</button>
                     <button class="btn btn-default filter-button" data-filter="tvshows">TV Shows</button>
-                    <button class="btn btn-default filter-button" data-filter="companies">Companies</button>
-                    <button class="btn btn-default filter-button" data-filter="keywords">Keywords</button>
                 </div>
                 <br/>
                 <br/>  
@@ -112,7 +89,21 @@ $(document).ready(function(){
                     } else if (key == "people") {
                         imgPath = res[i].profile_path;
                     }
+                    var title = res[i].title;
+                    var overview = res[i].overview;
+                    var year = res[i].release_date;
+                    var rating = res[i].vote_average;
 
+
+                    var yearStr = '';
+                    var ratingStr = '';
+                    if (typeof year != 'undefined') {
+                        yearStr = JSON.stringify(year).substring(1, 5);
+                    }
+
+                    if (typeof rating != 'undefined') {
+                        ratingStr = JSON.stringify(rating).substring(0, 4);
+                    }
                     var img = null;
 
                     if(imgPath === null) {
@@ -120,11 +111,17 @@ $(document).ready(function(){
                     } else {
                         img = "https://image.tmdb.org/t/p/w500" + imgPath;
                     }
-
                     apiHTML += `
                             <div class="container gallery_product col-lg-6 col-md-6 col-sm-6 col-xs-6 filter ${key}">
-                                <img src=${img} class="img-responsive">
-                            </div>
+                               <div class="frame">
+                                <a href="#">
+        	<span class="caption">
+        		<h2>${title} (${yearStr}) <span style="float: right; font-weight: lighter !important;"><span class="fa fa-star checked"></span> ${ratingStr}</span></h2>
+            <p class="desc">${overview}</p>
+        	</span>              
+                  <img src=${img} class="img-responsive"></a>
+                </div>
+                </div>
                         `;
                 }
             }
