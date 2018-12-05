@@ -1,134 +1,83 @@
-/** {*/
-    /*box-sizing: border-box*/
-/*}*/
-
-/*html {*/
-    /*-webkit-font-smoothing: antialiased;*/
-    /*-moz-osx-font-smoothing: grayscale;*/
-    /*font-family: 'Dosis', sans-serif;*/
-    /*line-height: 1.6;*/
-    /*color: #666;*/
-    /*background: #F6F6F6;*/
-/*}*/
-
-/*#root {*/
-    /*max-width: 1200px;*/
-    /*margin: 0 auto;*/
-/*}*/
-
-/*h1 {*/
-    /*text-align: center;*/
-    /*padding: 1.5rem 2.5rem;*/
-    /*background-image: linear-gradient(120deg, #fbc2eb 0%, #a6c1ee 100%);*/
-    /*margin: 0 0 2rem 0;*/
-    /*font-size: 1.5rem;*/
-    /*color: white;*/
-/*}*/
-
-/*img {*/
-    /*display: block;*/
-    /*margin: 1rem auto;*/
-    /*max-width: 100%;*/
-/*}*/
-
-/*p {*/
-    /*padding: 0 2.5rem 2.5rem;*/
-    /*margin: 0;*/
-/*}*/
-
-/*.container {*/
-    /*display: flex;*/
-    /*flex-wrap: wrap;*/
-/*}*/
-
-/*.card {*/
-    /*margin: 1rem;*/
-    /*background: white;*/
-    /*box-shadow: 2px 4px 25px rgba(0, 0, 0, .1);*/
-    /*border-radius: 12px;*/
-    /*overflow: hidden;*/
-    /*transition: all .2s linear;*/
-/*}*/
-
-/*.card:hover {*/
-    /*box-shadow: 2px 8px 45px rgba(0, 0, 0, .15);*/
-    /*transform: translate3D(0, -2px, 0);*/
-/*}*/
-
-/*@media screen and (min-width: 600px) {*/
-    /*.card {*/
-        /*flex: 1 1 calc(50% - 2rem);*/
-    /*}*/
-/*}*/
-
-/*@media screen and (min-width: 900px) {*/
-    /*.card {*/
-        /*flex: 1 1 calc(33% - 2rem);*/
-    /*}*/
-/*}*/
-
-/*.card:nth-child(2n) h1 {*/
-    /*background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);*/
-/*}*/
-
-/*.card:nth-child(4n) h1 {*/
-    /*background-image: linear-gradient(120deg, #ff9a9e 0%, #fecfef 100%);*/
-/*}*/
-
-/*.card:nth-child(5n) h1 {*/
-    /*background-image: linear-gradient(120deg, #ffc3a0 0%, #ffafbd 100%);*/
-/*}*/
-
+/*Base CSS Elements*/
 body{
     margin-top:20px;
-    background: black !important;
+    background:linear-gradient(0deg, rgba(0, 0, 0, 0.94), rgba(0, 0, 0, 0.64)),url(https://images.pexels.com/photos/269140/pexels-photo-269140.jpeg);
+    background-size:cover;
     font-family: 'Montserrat', sans-serif !important;
 }
-.movie-item span {
-    display: block;
-}
-
 .container{
     padding-right: 15px !important;
     padding-left: 15px !important;
     margin-right: auto !important;
     margin-left: 22px !important;
+    width: auto !important;
 }
 
+h2{
+    color: #B4001C !important;
+    font-size:19px !important;
+    font-family: 'Lato', sans-serif !important;
+    font-weight: 700 !important;
+}
+h4{
+    color: #ffffff !important;
+}
+button{
+    background: #B4001C !important;
+    color: white !important;
+    border: none !important;
+}
+button:active{
+    background-color: #ffffff !important;
+    color: #ff0000 !important;
+    border: none !important;
+}
+.btn{
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+}
+.btn-default:active .btn:active
+{
+    background-color: #ffffff !important;
+    color: #ff0000 !important;
+    border: none !important;
+}
+
+/*Filter Buttons*/
+.filter-button:hover
+{
+    font-size: 18px !important;
+    border: none !important;
+    /*border: 1px solid #ffffff !important;*/
+    border-radius: 5px!important;
+    text-align: center!important;
+    color: #ff0000 !important;
+    background-color: #ffffff !important;
+
+}
+.genre{
+    font-size: 13px !important;
+}
+
+.movie-item span {
+    display: block;
+}
+
+/*Gallery Styles*/
 .gallery-title
 {
-    font-size: 36px;
+    font-size: 58px;
     color: #ffffff;
     text-align: center;
     font-weight: 500;
     margin-bottom: 50px;
-    font-family: 'Black Han Sans', sans-serif;
+    font-family: 'Dosis', sans-serif;
+    font-weight: 800;
 }
-
-.filter-button
+.gallery_product
 {
-    font-size: 18px;
-    border: 1px solid #42B32F;
-    border-radius: 5px;
-    text-align: center;
-    color: #42B32F;
     margin-bottom: 30px;
-
-}
-.filter-button:hover
-{
-    font-size: 18px;
-    border: 1px solid #42B32F;
-    border-radius: 5px;
-    text-align: center;
-    color: #ffffff;
-    background-color: #42B32F;
-
-}
-.btn-default:active .filter-button:active
-{
-    background-color: #42B32F;
-    color: white;
+    width: 316px !important;
 }
 
 .port-image
@@ -136,11 +85,11 @@ body{
     width: 100%;
 }
 
-.gallery_product
-{
-    margin-bottom: 30px;
-    width: 316px !important;
+#api-results{
+    margin-bottom: -17px !important;
 }
+
+/*Movie Detail Elements*/
 
 .frame {
     float: left;
@@ -156,26 +105,9 @@ body{
     width: 100%;
 }
 
-/*.frame img {*/
-    /*display: block;*/
-    /*height: auto;*/
-    /*position: absolute;*/
-    /*top: -125%;*/
-    /*left: -50%;*/
-    /*width: auto;*/
-    /*z-index: 0;*/
-/*}*/
-
-.frame:nth-child(2) img {
-    top: -90%;
-    left: -70%;
-}
-.frame:nth-child(3) img {
-    top: -90%;
-}
 
 .frame a .caption {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(4, 4, 3, 0.82);
     display: block;
     overflow: hidden;
     padding: 10px;
@@ -215,6 +147,7 @@ body{
     margin-bottom: 20px;
 }
 
+/*Rating element*/
 .checked {
     color: yellow;
 }

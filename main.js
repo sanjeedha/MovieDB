@@ -10,8 +10,6 @@ $(document).ready(function(e){
 
 
 $(document).ready(function(){
-
-
     function dynamicSort(property) {
         var sortOrder = 1;
         if(property[0] === "-") {
@@ -75,7 +73,7 @@ $(document).ready(function(){
 
 
             var apiHTML = `            
-                <div align="center" style="margin-bottom: 37px">
+                <div align="center" style= "margin-bottom: -15px !important;">
                     <button class="btn btn-default filter-button" data-filter="all">All</button>
                     <button class="btn btn-default filter-button" data-filter="movies">Movies</button>
                     <button class="btn btn-default filter-button" data-filter="people">People</button>
@@ -224,8 +222,8 @@ $(document).ready(function(){
                                <div class="frame">
                                 <a href="#">
         	<span class="caption">
-        		<h2>${finalResults[i].title} ${finalResults[i].yearStr} <span style="float: right; font-weight: lighter !important;"><span class="fa fa-star checked"></span> ${finalResults[i].ratingStr}</span></h2>
-                <h2>${finalResults[i].genreStr}</h2>
+        		<h2>${finalResults[i].title} ${finalResults[i].yearStr} <span style="float: right; color:white !important; font-weight: lighter !important; font-size: 15px;"><span class="fa fa-star checked"></span> ${finalResults[i].ratingStr}</span></h2>
+                <h4 style="font-size: 13px !important; line-height: 1.5 !important;">${finalResults[i].genreStr}</h4>
             <p class="desc">${finalResults[i].overview}</p>
         	</span>              
                   <img src=${finalResults[i].img} class="img-responsive"></a>
