@@ -87,11 +87,54 @@ $(document).ready(function(){
 
             var finalResults = [];
 
+            var genreMap = {
+                28: "Action",
+                12: "Adventure",
+                16: "Animation",
+                35: "Comedy",
+                80: "Crime",
+                99: "Documentary",
+                18: "Drama",
+                10751: "Family",
+                14: "Fantasy",
+                36: "History",
+                27: "Horror",
+                10402: "Music",
+                9648: "Mystery",
+                10749: "Romance",
+                878: "Science Fiction",
+                10770: "TV Movie",
+                53: "Thriller",
+                10752: "War",
+                37: "Western"
+            };
+
             for (var [key, value] of allResults) {
 
                 var res = value[0]["results"];
 
+
+
                 for (i=0; i<res.length; i++) {
+
+                    var genreNames = [];
+
+                    if (typeof res[i].genre_ids != "undefined") {
+                         console.log(res[i].genre_ids);
+
+                        for(j=0; j<res[i].genre_ids.length; j++){
+                            console.log(genreMap[res[i].genre_ids[j]]);
+                            genreNames.push(genreMap[res[i].genre_ids[j]]);
+
+                        }
+                    }
+
+                    var genreStr = "";
+
+                    if (genreNames.length > 0){
+                        genreStr = genreNames.join(", ");
+                    }
+
 
                     var imgPath = null;
 
@@ -147,7 +190,8 @@ $(document).ready(function(){
                         "ratingStr": ratingStr,
                         "overview": overview,
                         "img": img,
-                        "year": year
+                        "year": year,
+                        "genreStr": genreStr
                     };
 
                     finalResults.push(tmpResult);
@@ -167,12 +211,12 @@ $(document).ready(function(){
                 }
             }
 
-            console.log(finalResults);
+            // console.log(finalResults);
 
             // finalResults.sort(dynamicSort("-ratingStr"));
             // finalResults.sort(dynamicSort("-yearStr"));
 
-            console.log(finalResults);
+            // console.log(finalResults);
 
             for (i = 0; i < finalResults.length; i++) {
                 apiHTML += `
@@ -181,6 +225,7 @@ $(document).ready(function(){
                                 <a href="#">
         	<span class="caption">
         		<h2>${finalResults[i].title} ${finalResults[i].yearStr} <span style="float: right; font-weight: lighter !important;"><span class="fa fa-star checked"></span> ${finalResults[i].ratingStr}</span></h2>
+                <h2>${finalResults[i].genreStr}</h2>
             <p class="desc">${finalResults[i].overview}</p>
         	</span>              
                   <img src=${finalResults[i].img} class="img-responsive"></a>
