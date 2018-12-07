@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+    // Sorting based on Year and Rating
     function dynamicSort(property) {
         var sortOrder = 1;
         if (property[0] === "-") {
@@ -12,6 +14,8 @@ $(document).ready(function () {
     }
 
     var allResults = new Map();
+
+    //Search Function for Movies, Actors and TV Shows
 
     $(".search-button").click(function () {
 
@@ -61,7 +65,7 @@ $(document).ready(function () {
             allResults.set("people", response2);
             allResults.set("tvshows", response3);
 
-
+            //Filter Function for All, Movies, TVShows and People
             var apiHTML = `            
                 <div align="center" style= "margin-bottom: -15px !important;">
                     <button class="btn btn-default filter-button" data-filter="all">All</button>
@@ -96,6 +100,8 @@ $(document).ready(function () {
                 10752: "War",
                 37: "Western"
             };
+
+            // Displaying the Results of the Search - Poster, Title, Rating, Genre and Overview
 
             for (var [key, value] of allResults) {
 
@@ -215,6 +221,8 @@ $(document).ready(function () {
 
 
             $("#api-results").html(apiHTML);
+
+            // Filtering the Results of the Search
 
             $(".filter-button").click(function () {
                 var value = $(this).attr('data-filter');
